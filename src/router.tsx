@@ -11,6 +11,7 @@ export const getRouter = () => {
     defaultPreload: "intent",
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
+    defaultNotFoundComponent: () => <div>Not Found</div>,
   });
 
   return router;

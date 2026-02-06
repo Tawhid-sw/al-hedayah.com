@@ -6,7 +6,6 @@ import { useNavigate } from "@tanstack/react-router";
 // import { eq } from "drizzle-orm";
 import { todoTable } from "@/db/schema";
 import { authMiddleware } from "@/lib/middleware";
-import { db } from "@/db";
 
 const validateTodoTitle = z.object({
   title: z
@@ -19,6 +18,7 @@ export const postTodo = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
   .inputValidator(validateTodoTitle)
   .handler(async ({ data }) => {
+    const { db } = await import("@/db/index");
     await db.insert(todoTable).values({ title: data.title });
     return { message: "New todo added", status: 200, ok: true };
   });
@@ -26,6 +26,7 @@ export const postTodo = createServerFn({ method: "POST" })
 export const getTodos = createServerFn()
   .middleware([authMiddleware])
   .handler(async () => {
+    const { db } = await import("@/db/index");
     const allTodos = await db.select().from(todoTable);
     return allTodos;
   });

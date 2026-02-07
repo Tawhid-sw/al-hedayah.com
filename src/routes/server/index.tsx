@@ -3,8 +3,6 @@ import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { useNavigate } from "@tanstack/react-router";
-// import { eq } from "drizzle-orm";
-import { todoTable } from "@/db/schema";
 import { authMiddleware } from "@/lib/middleware";
 
 const validateTodoTitle = z.object({
@@ -14,21 +12,21 @@ const validateTodoTitle = z.object({
     .max(255, "Todo title cannot be 255 char longer"),
 });
 
-export const postTodo = createServerFn({ method: "POST" })
-  .middleware([authMiddleware])
-  .inputValidator(validateTodoTitle)
-  .handler(async ({ data }) => {
-    const { db } = await import("@/db/index");
-    await db.insert(todoTable).values({ title: data.title });
-    return { message: "New todo added", status: 200, ok: true };
-  });
+export type todoTitlePrpops = z.infer<typeof validateTodoTitle>;
 
 export const getTodos = createServerFn()
   .middleware([authMiddleware])
   .handler(async () => {
-    const { db } = await import("@/db/index");
-    const allTodos = await db.select().from(todoTable);
-    return allTodos;
+    const { getTodosFnc } = await import("@/data/server");
+    return getTodosFnc();
+  });
+
+export const postTodo = createServerFn({ method: "POST" })
+  .middleware([authMiddleware])
+  .inputValidator(validateTodoTitle)
+  .handler(async ({ data }) => {
+    const { postTodoFnc } = await import("@/data/server");
+    return postTodoFnc(data);
   });
 
 export const Route = createFileRoute("/server/")({

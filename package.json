@@ -10,10 +10,10 @@
     "format": "biome format",
     "lint": "biome lint",
     "check": "biome check",
-    "deploy": "pnpm run build && wrangler deploy"
+    "deploy": "pnpm run build && wrangler deploy",
+    "cf-typegen": "wrangler types"
   },
   "dependencies": {
-    "@cloudflare/vite-plugin": "^1.13.8",
     "@neondatabase/serverless": "^1.0.2",
     "@tailwindcss/vite": "^4.0.6",
     "@tanstack/react-devtools": "^0.7.0",
@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.4",
+    "@cloudflare/vite-plugin": "^1.13.8",
     "@tanstack/devtools-vite": "^0.3.11",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.2.0",

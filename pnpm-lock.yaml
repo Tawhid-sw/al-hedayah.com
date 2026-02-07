@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@cloudflare/vite-plugin':
-        specifier: ^1.13.8
-        version: 1.23.0(vite@7.3.1(@types/node@22.19.8)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.21.0))(workerd@1.20260131.0)(wrangler@4.62.0)
       '@neondatabase/serverless':
         specifier: ^1.0.2
         version: 1.0.2
@@ -90,6 +87,9 @@ importers:
       '@biomejs/biome':
         specifier: 2.2.4
         version: 2.2.4
+      '@cloudflare/vite-plugin':
+        specifier: ^1.13.8
+        version: 1.23.0(vite@7.3.1(@types/node@22.19.8)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.21.0))(workerd@1.20260131.0)(wrangler@4.62.0)
       '@tanstack/devtools-vite':
         specifier: ^0.3.11
         version: 0.3.12(vite@7.3.1(@types/node@22.19.8)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.21.0))

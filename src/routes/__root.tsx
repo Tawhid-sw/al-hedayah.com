@@ -2,6 +2,7 @@ import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { Toaster } from "@/components/ui/sonner";
+import { injectSpeedInsights } from "@vercel/speed-insights";
 
 import Header from "../components/Header";
 
@@ -32,6 +33,7 @@ export const Route = createRootRoute({
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  injectSpeedInsights();
   return (
     <html lang="en">
       <head>

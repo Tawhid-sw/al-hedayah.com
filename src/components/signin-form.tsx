@@ -155,7 +155,9 @@ export function SigninForm({
                       <div className="flex items-center">
                         <FieldLabel htmlFor={field.name}>Password</FieldLabel>
                         <a
-                          href="#"
+                          onClick={() =>
+                            router.navigate({ to: "/auth/forgot-password" })
+                          }
                           className="ml-auto text-sm underline-offset-4 hover:underline"
                         >
                           Forgot your password?

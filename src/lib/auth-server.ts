@@ -4,6 +4,9 @@ import { withAuthHandler } from "./auth-handler";
 import { isRedirect, redirect } from "@tanstack/react-router";
 import { getRequest } from "@tanstack/react-start/server";
 import * as z from "zod";
+import { getDb } from "@/db/index";
+import { user } from "@/db/schema/auth-schema";
+import { eq } from "drizzle-orm";
 
 // SignIn
 export const signIn = createServerFn({ method: "POST" })
@@ -68,16 +71,23 @@ export const signInWithGoogle = createServerFn({ method: "POST" }).handler(
 // Request the reset email
 export const requestPasswordReset = createServerFn({ method: "POST" })
   .inputValidator(z.object({ email: z.string().email() }))
-  .handler(({ data }) =>
-    withAuthHandler(() =>
+  .handler(async ({ data }) => {
+    const db = getDb({ DATABASE_URL: process.env.DATABASE_URL! });
+    const [existingUser] = await db
+      .select()
+      .from(user)
+      .where(eq(user.email, data.email))
+      .limit(1);
+    if (!existingUser) return { error: "User not found" };
+    return withAuthHandler(() =>
       auth.api.requestPasswordReset({
         body: {
           email: data.email,
           redirectTo: "/auth/set-new-password",
         },
       }),
-    ),
-  );
+    );
+  });
 
 //Set the new password
 export const performPasswordReset = createServerFn({ method: "POST" })

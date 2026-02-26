@@ -33,7 +33,7 @@ function RouteComponent() {
           toast.error(result.error);
         } else {
           setIsSubmitting(false);
-          toast.success("If an account exists, a reset link has been sent!");
+          toast.success("A reset link has been sent!");
         }
       } catch (error: any) {
         toast.error("Failed to send reset email");

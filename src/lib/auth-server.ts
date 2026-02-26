@@ -3,7 +3,7 @@ import { auth } from "./auth";
 import { withAuthHandler } from "./auth-handler";
 import { isRedirect, redirect } from "@tanstack/react-router";
 import { getRequest } from "@tanstack/react-start/server";
-import z from "zod";
+import * as z from "zod";
 
 // SignIn
 export const signIn = createServerFn({ method: "POST" })
@@ -48,7 +48,7 @@ export const signOut = createServerFn({ method: "POST" }).handler(async () => {
     console.error("Sign out error:", error);
   }
 
-  throw redirect({ to: "/auth/signin" });
+  throw redirect({ to: "/auth/sign-in" });
 });
 
 // SignIn with Google

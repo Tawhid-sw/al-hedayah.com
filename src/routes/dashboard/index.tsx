@@ -8,7 +8,7 @@ export const Route = createFileRoute("/dashboard/")({
   beforeLoad: async () => {
     const session = await getSession();
     if (!session) {
-      throw redirect({ to: "/auth/signin" });
+      throw redirect({ to: "/auth/sign-in" });
     }
     return { user: session.user };
   },

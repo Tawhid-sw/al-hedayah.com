@@ -1,4 +1,3 @@
-// lib/auth-handler.ts
 import { isRedirect } from "@tanstack/react-router";
 import { APIError } from "better-auth/api";
 import { setResponseStatus } from "@tanstack/react-start/server";

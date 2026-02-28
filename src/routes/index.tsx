@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button.tsx";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   Zap,
@@ -7,6 +8,8 @@ import {
   Waves,
   Sparkles,
 } from "lucide-react";
+import { signOut } from "@/lib/auth-server";
+import { useServerFn } from "@tanstack/react-start";
 
 export const Route = createFileRoute("/")({ component: App });
 
@@ -50,6 +53,8 @@ function App() {
     },
   ];
 
+  const signOutFn = useServerFn(signOut);
+
   return (
     <div className="min-h-screen bg-linear-to-b from-slate-900 via-slate-800 to-slate-900">
       <section className="relative py-20 px-6 text-center overflow-hidden">
@@ -77,14 +82,7 @@ function App() {
             safety.
           </p>
           <div className="flex flex-col items-center gap-4">
-            <a
-              href="https://tanstack.com/start"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors shadow-lg shadow-cyan-500/50"
-            >
-              Documentation
-            </a>
+            <Button onClick={() => signOutFn()}>Sign out</Button>
             <p className="text-gray-400 text-sm mt-2">
               Begin your TanStack Start journey by editing{" "}
               <code className="px-2 py-1 bg-slate-700 rounded text-cyan-400">

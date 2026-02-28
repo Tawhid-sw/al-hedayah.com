@@ -9,6 +9,7 @@ interface InputProps {
   disabled?: boolean;
   children?: React.ReactNode;
   placeholder: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const InputField = ({
@@ -19,13 +20,14 @@ export const InputField = ({
   disabled = false,
   children,
   placeholder,
+  onChange,
 }: InputProps) => {
   return (
     <form.Field
       name={name}
       children={(field: any) => {
         const isInvalid =
-          field.state.meta.isTouched && !field.state.meta.isValid;
+          field.state.meta.isTouched && field.state.meta.errors.length > 0;
 
         return (
           <Field data-invalid={isInvalid}>
@@ -39,12 +41,14 @@ export const InputField = ({
               type={type}
               value={field.state.value}
               onBlur={field.handleBlur}
-              onChange={(e) => field.handleChange(e.target.value)}
+              onChange={(e) => {
+                field.handleChange(e.target.value);
+                if (onChange) onChange(e);
+              }}
               placeholder={placeholder}
               aria-invalid={isInvalid}
               disabled={disabled}
             />
-
             {isInvalid && <FieldError errors={field.state.meta.errors} />}
           </Field>
         );

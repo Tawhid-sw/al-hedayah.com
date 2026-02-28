@@ -3,6 +3,8 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { tanstackStartCookies } from "better-auth/tanstack-start";
 import { getDb } from "@/db"; // your drizzle instance
 import { Resend } from "resend";
+import { organization } from "better-auth/plugins";
+import * as schema from "@/db/schema/auth-schema";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -11,10 +13,11 @@ export const auth = betterAuth({
   baseURL: process.env.AUTH_BASE_URL!,
   database: drizzleAdapter(getDb({ DATABASE_URL: process.env.DATABASE_URL! }), {
     provider: "pg",
+    schema: schema,
   }),
   emailAndPassword: {
     enabled: true,
-    sendResetPassword: async ({ user, url, token }, request) => {
+    sendResetPassword: async ({ user, url }) => {
       await resend.emails.send({
         from: "Al-Hedayah <auth@al-hedayah.com>",
         to: [user.email],
@@ -29,7 +32,7 @@ export const auth = betterAuth({
         `,
       });
     },
-    onPasswordReset: async ({ user }, request) => {
+    onPasswordReset: async ({ user }) => {
       console.log(`Password for user ${user.email} has been reset.`);
     },
   },
@@ -40,5 +43,21 @@ export const auth = betterAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     },
   },
-  plugins: [tanstackStartCookies()],
+  user: {
+    additionalFields: {
+      role: {
+        type: "string",
+        required: false,
+        defaultValue: "user",
+      },
+    },
+  },
+  plugins: [
+    tanstackStartCookies(),
+    organization({
+      allowUserToCreateOrganization: async (user) => {
+        return user.role === "owner";
+      },
+    }),
+  ],
 });

@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as OwnerCreateOrganizationRouteImport } from './routes/owner/create-organization'
+import { Route as OwnerCreateAdminRouteImport } from './routes/owner/create-admin'
 import { Route as AuthUpdatePasswordRouteImport } from './routes/auth/update-password'
 import { Route as AuthSignUpRouteImport } from './routes/auth/sign-up'
 import { Route as AuthSignInRouteImport } from './routes/auth/sign-in'
@@ -26,6 +28,16 @@ const IndexRoute = IndexRouteImport.update({
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/dashboard/',
   path: '/dashboard/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OwnerCreateOrganizationRoute = OwnerCreateOrganizationRouteImport.update({
+  id: '/owner/create-organization',
+  path: '/owner/create-organization',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OwnerCreateAdminRoute = OwnerCreateAdminRouteImport.update({
+  id: '/owner/create-admin',
+  path: '/owner/create-admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthUpdatePasswordRoute = AuthUpdatePasswordRouteImport.update({
@@ -66,6 +78,8 @@ export interface FileRoutesByFullPath {
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
   '/auth/update-password': typeof AuthUpdatePasswordRoute
+  '/owner/create-admin': typeof OwnerCreateAdminRoute
+  '/owner/create-organization': typeof OwnerCreateOrganizationRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
@@ -76,6 +90,8 @@ export interface FileRoutesByTo {
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
   '/auth/update-password': typeof AuthUpdatePasswordRoute
+  '/owner/create-admin': typeof OwnerCreateAdminRoute
+  '/owner/create-organization': typeof OwnerCreateOrganizationRoute
   '/dashboard': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
@@ -87,6 +103,8 @@ export interface FileRoutesById {
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
   '/auth/update-password': typeof AuthUpdatePasswordRoute
+  '/owner/create-admin': typeof OwnerCreateAdminRoute
+  '/owner/create-organization': typeof OwnerCreateOrganizationRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
@@ -99,6 +117,8 @@ export interface FileRouteTypes {
     | '/auth/sign-in'
     | '/auth/sign-up'
     | '/auth/update-password'
+    | '/owner/create-admin'
+    | '/owner/create-organization'
     | '/dashboard/'
     | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
@@ -109,6 +129,8 @@ export interface FileRouteTypes {
     | '/auth/sign-in'
     | '/auth/sign-up'
     | '/auth/update-password'
+    | '/owner/create-admin'
+    | '/owner/create-organization'
     | '/dashboard'
     | '/api/auth/$'
   id:
@@ -119,6 +141,8 @@ export interface FileRouteTypes {
     | '/auth/sign-in'
     | '/auth/sign-up'
     | '/auth/update-password'
+    | '/owner/create-admin'
+    | '/owner/create-organization'
     | '/dashboard/'
     | '/api/auth/$'
   fileRoutesById: FileRoutesById
@@ -130,6 +154,8 @@ export interface RootRouteChildren {
   AuthSignInRoute: typeof AuthSignInRoute
   AuthSignUpRoute: typeof AuthSignUpRoute
   AuthUpdatePasswordRoute: typeof AuthUpdatePasswordRoute
+  OwnerCreateAdminRoute: typeof OwnerCreateAdminRoute
+  OwnerCreateOrganizationRoute: typeof OwnerCreateOrganizationRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
@@ -148,6 +174,20 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard/'
       preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/owner/create-organization': {
+      id: '/owner/create-organization'
+      path: '/owner/create-organization'
+      fullPath: '/owner/create-organization'
+      preLoaderRoute: typeof OwnerCreateOrganizationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/owner/create-admin': {
+      id: '/owner/create-admin'
+      path: '/owner/create-admin'
+      fullPath: '/owner/create-admin'
+      preLoaderRoute: typeof OwnerCreateAdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth/update-password': {
@@ -202,6 +242,8 @@ const rootRouteChildren: RootRouteChildren = {
   AuthSignInRoute: AuthSignInRoute,
   AuthSignUpRoute: AuthSignUpRoute,
   AuthUpdatePasswordRoute: AuthUpdatePasswordRoute,
+  OwnerCreateAdminRoute: OwnerCreateAdminRoute,
+  OwnerCreateOrganizationRoute: OwnerCreateOrganizationRoute,
   DashboardIndexRoute: DashboardIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
 }

@@ -20,6 +20,7 @@ import { Route as AuthSetNewPasswordRouteImport } from './routes/auth/set-new-pa
 import { Route as AuthForgotPasswordRouteImport } from './routes/auth/forgot-password'
 import { Route as DashboardPostContentIndexRouteImport } from './routes/dashboard/post-content/index'
 import { Route as LibraryIdPostIdRouteImport } from './routes/library/id.$postId'
+import { Route as DashboardPostEditPostIdRouteImport } from './routes/dashboard/post-edit/$postId'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth.$'
 
 const IndexRoute = IndexRouteImport.update({
@@ -78,6 +79,11 @@ const LibraryIdPostIdRoute = LibraryIdPostIdRouteImport.update({
   path: '/library/id/$postId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardPostEditPostIdRoute = DashboardPostEditPostIdRouteImport.update({
+  id: '/dashboard/post-edit/$postId',
+  path: '/dashboard/post-edit/$postId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -95,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/owner/create-organization': typeof OwnerCreateOrganizationRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/dashboard/post-edit/$postId': typeof DashboardPostEditPostIdRoute
   '/library/id/$postId': typeof LibraryIdPostIdRoute
   '/dashboard/post-content/': typeof DashboardPostContentIndexRoute
 }
@@ -109,6 +116,7 @@ export interface FileRoutesByTo {
   '/owner/create-organization': typeof OwnerCreateOrganizationRoute
   '/dashboard': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/dashboard/post-edit/$postId': typeof DashboardPostEditPostIdRoute
   '/library/id/$postId': typeof LibraryIdPostIdRoute
   '/dashboard/post-content': typeof DashboardPostContentIndexRoute
 }
@@ -124,6 +132,7 @@ export interface FileRoutesById {
   '/owner/create-organization': typeof OwnerCreateOrganizationRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/dashboard/post-edit/$postId': typeof DashboardPostEditPostIdRoute
   '/library/id/$postId': typeof LibraryIdPostIdRoute
   '/dashboard/post-content/': typeof DashboardPostContentIndexRoute
 }
@@ -140,6 +149,7 @@ export interface FileRouteTypes {
     | '/owner/create-organization'
     | '/dashboard/'
     | '/api/auth/$'
+    | '/dashboard/post-edit/$postId'
     | '/library/id/$postId'
     | '/dashboard/post-content/'
   fileRoutesByTo: FileRoutesByTo
@@ -154,6 +164,7 @@ export interface FileRouteTypes {
     | '/owner/create-organization'
     | '/dashboard'
     | '/api/auth/$'
+    | '/dashboard/post-edit/$postId'
     | '/library/id/$postId'
     | '/dashboard/post-content'
   id:
@@ -168,6 +179,7 @@ export interface FileRouteTypes {
     | '/owner/create-organization'
     | '/dashboard/'
     | '/api/auth/$'
+    | '/dashboard/post-edit/$postId'
     | '/library/id/$postId'
     | '/dashboard/post-content/'
   fileRoutesById: FileRoutesById
@@ -183,6 +195,7 @@ export interface RootRouteChildren {
   OwnerCreateOrganizationRoute: typeof OwnerCreateOrganizationRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  DashboardPostEditPostIdRoute: typeof DashboardPostEditPostIdRoute
   LibraryIdPostIdRoute: typeof LibraryIdPostIdRoute
   DashboardPostContentIndexRoute: typeof DashboardPostContentIndexRoute
 }
@@ -266,6 +279,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LibraryIdPostIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/post-edit/$postId': {
+      id: '/dashboard/post-edit/$postId'
+      path: '/dashboard/post-edit/$postId'
+      fullPath: '/dashboard/post-edit/$postId'
+      preLoaderRoute: typeof DashboardPostEditPostIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -287,6 +307,7 @@ const rootRouteChildren: RootRouteChildren = {
   OwnerCreateOrganizationRoute: OwnerCreateOrganizationRoute,
   DashboardIndexRoute: DashboardIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  DashboardPostEditPostIdRoute: DashboardPostEditPostIdRoute,
   LibraryIdPostIdRoute: LibraryIdPostIdRoute,
   DashboardPostContentIndexRoute: DashboardPostContentIndexRoute,
 }

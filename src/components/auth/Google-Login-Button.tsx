@@ -1,7 +1,7 @@
 import { toast } from "sonner";
 import { Button } from "../ui/button";
 import { useServerFn } from "@tanstack/react-start";
-import { signInWithGoogle } from "@/lib/auth-server";
+import { signInWithGoogle } from "@/lib/auth/auth-server";
 
 export const GoogleLoginButton = () => {
   const googleAuthFn = useServerFn(signInWithGoogle);

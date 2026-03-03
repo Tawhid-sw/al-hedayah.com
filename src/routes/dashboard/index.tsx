@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { Button } from "@/components/ui/button";
-import { signOut } from "@/lib/auth-server";
-import { protectRoute } from "@/lib/middleware";
+import { signOut } from "@/lib/auth/auth-server";
+import { protectRoute } from "@/lib/auth/middleware";
 
 export const Route = createFileRoute("/dashboard/")({
-  beforeLoad: () => protectRoute({ data: "dashboard" }),
+  beforeLoad: () => protectRoute({ data: "admin" }),
   component: RouteComponent,
 });
 

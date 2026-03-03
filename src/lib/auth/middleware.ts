@@ -1,6 +1,6 @@
 import { createMiddleware, createServerFn } from "@tanstack/react-start";
 import { getRequestHeaders } from "@tanstack/react-start/server";
-import { auth } from "@/lib/auth";
+import { auth } from "./auth";
 import { redirect } from "@tanstack/react-router";
 
 /**
@@ -45,7 +45,7 @@ export const authMiddleware = createMiddleware().server(
 );
 
 export const protectRoute = createServerFn({ method: "GET" })
-  .inputValidator((d: "owner" | "dashboard" | "user") => d)
+  .inputValidator((d: "owner" | "admin" | "user") => d)
   .handler(async ({ data: target }) => {
     const headers = getRequestHeaders();
     const session = await auth.api.getSession({ headers });
@@ -67,7 +67,7 @@ export const protectRoute = createServerFn({ method: "GET" })
       }
       throw redirect({ to: "/" });
     }
-    if (target === "dashboard" && !isOwner && !isAdmin) {
+    if (target === "admin" && !isOwner && !isAdmin) {
       throw redirect({ to: "/" });
     }
     return {

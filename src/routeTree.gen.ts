@@ -18,6 +18,8 @@ import { Route as AuthSignUpRouteImport } from './routes/auth/sign-up'
 import { Route as AuthSignInRouteImport } from './routes/auth/sign-in'
 import { Route as AuthSetNewPasswordRouteImport } from './routes/auth/set-new-password'
 import { Route as AuthForgotPasswordRouteImport } from './routes/auth/forgot-password'
+import { Route as DashboardPostContentIndexRouteImport } from './routes/dashboard/post-content/index'
+import { Route as LibraryIdPostIdRouteImport } from './routes/library/id.$postId'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth.$'
 
 const IndexRoute = IndexRouteImport.update({
@@ -65,6 +67,17 @@ const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
   path: '/auth/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardPostContentIndexRoute =
+  DashboardPostContentIndexRouteImport.update({
+    id: '/dashboard/post-content/',
+    path: '/dashboard/post-content/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LibraryIdPostIdRoute = LibraryIdPostIdRouteImport.update({
+  id: '/library/id/$postId',
+  path: '/library/id/$postId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -82,6 +95,8 @@ export interface FileRoutesByFullPath {
   '/owner/create-organization': typeof OwnerCreateOrganizationRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/library/id/$postId': typeof LibraryIdPostIdRoute
+  '/dashboard/post-content/': typeof DashboardPostContentIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -94,6 +109,8 @@ export interface FileRoutesByTo {
   '/owner/create-organization': typeof OwnerCreateOrganizationRoute
   '/dashboard': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/library/id/$postId': typeof LibraryIdPostIdRoute
+  '/dashboard/post-content': typeof DashboardPostContentIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -107,6 +124,8 @@ export interface FileRoutesById {
   '/owner/create-organization': typeof OwnerCreateOrganizationRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/library/id/$postId': typeof LibraryIdPostIdRoute
+  '/dashboard/post-content/': typeof DashboardPostContentIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,6 +140,8 @@ export interface FileRouteTypes {
     | '/owner/create-organization'
     | '/dashboard/'
     | '/api/auth/$'
+    | '/library/id/$postId'
+    | '/dashboard/post-content/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +154,8 @@ export interface FileRouteTypes {
     | '/owner/create-organization'
     | '/dashboard'
     | '/api/auth/$'
+    | '/library/id/$postId'
+    | '/dashboard/post-content'
   id:
     | '__root__'
     | '/'
@@ -145,6 +168,8 @@ export interface FileRouteTypes {
     | '/owner/create-organization'
     | '/dashboard/'
     | '/api/auth/$'
+    | '/library/id/$postId'
+    | '/dashboard/post-content/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -158,6 +183,8 @@ export interface RootRouteChildren {
   OwnerCreateOrganizationRoute: typeof OwnerCreateOrganizationRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  LibraryIdPostIdRoute: typeof LibraryIdPostIdRoute
+  DashboardPostContentIndexRoute: typeof DashboardPostContentIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -225,6 +252,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/post-content/': {
+      id: '/dashboard/post-content/'
+      path: '/dashboard/post-content'
+      fullPath: '/dashboard/post-content/'
+      preLoaderRoute: typeof DashboardPostContentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/library/id/$postId': {
+      id: '/library/id/$postId'
+      path: '/library/id/$postId'
+      fullPath: '/library/id/$postId'
+      preLoaderRoute: typeof LibraryIdPostIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -246,6 +287,8 @@ const rootRouteChildren: RootRouteChildren = {
   OwnerCreateOrganizationRoute: OwnerCreateOrganizationRoute,
   DashboardIndexRoute: DashboardIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  LibraryIdPostIdRoute: LibraryIdPostIdRoute,
+  DashboardPostContentIndexRoute: DashboardPostContentIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

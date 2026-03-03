@@ -1,6 +1,6 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useForm } from "@tanstack/react-form";
-import { signUp } from "@/lib/auth-server";
+import { signUp } from "@/lib/auth/auth-server";
 import { useState } from "react";
 import * as z from "zod";
 

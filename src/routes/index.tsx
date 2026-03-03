@@ -8,7 +8,7 @@ import {
   Waves,
   Sparkles,
 } from "lucide-react";
-import { signOut } from "@/lib/auth-server";
+import { signOut } from "@/lib/auth/auth-server";
 import { useServerFn } from "@tanstack/react-start";
 
 export const Route = createFileRoute("/")({ component: App });

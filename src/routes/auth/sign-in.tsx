@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { signIn } from "@/lib/auth-server";
+import { signIn } from "@/lib/auth/auth-server";
 import { GoogleLoginButton } from "@/components/auth/Google-Login-Button";
 import { useForm } from "@tanstack/react-form";
 import { useRouter } from "@tanstack/react-router";

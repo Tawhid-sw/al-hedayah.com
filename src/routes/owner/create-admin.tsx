@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useForm } from "@tanstack/react-form";
-import { createAdminByOwner } from "@/lib/auth-server";
+import { createAdminByOwner } from "@/lib/auth/auth-server";
 import * as z from "zod";
 import { useState } from "react";
 
@@ -10,7 +10,7 @@ import { Field, FieldGroup } from "@/components/ui/field";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { protectRoute } from "@/lib/middleware.ts";
+import { protectRoute } from "@/lib/auth/middleware";
 
 export const Route = createFileRoute("/owner/create-admin")({
   beforeLoad: () => protectRoute({ data: "owner" }),

@@ -1,14 +1,21 @@
-import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
+import {
+  HeadContent,
+  Scripts,
+  createRootRouteWithContext,
+} from "@tanstack/react-router";
+import { QueryClientProvider, type QueryClient } from "@tanstack/react-query";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { Toaster } from "@/components/ui/sonner";
 import { injectSpeedInsights } from "@vercel/speed-insights";
 
-import Header from "../components/Header";
-
 import appCss from "../styles.css?url";
+import { Navbar } from "@/components/navbar";
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<{
+  queryClient: QueryClient;
+}>()({
   head: () => ({
     meta: [
       {
@@ -27,39 +34,50 @@ export const Route = createRootRoute({
         rel: "stylesheet",
         href: appCss,
       },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      {
+        rel: "preconnect",
+        href: "https://fonts.gstatic.com",
+        crossOrigin: "anonymous",
+      },
     ],
   }),
   shellComponent: RootDocument,
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  const { queryClient } = Route.useRouteContext();
   injectSpeedInsights();
   return (
-    <html lang="en">
-      <head>
-        <script
-          crossOrigin="anonymous"
-          src="//unpkg.com/react-scan/dist/auto.global.js"
-        ></script>
-        <HeadContent />
-      </head>
-      <body>
-        <Toaster />
-        <Header />
-        {children}
-        <TanStackDevtools
-          config={{
-            position: "bottom-right",
-          }}
-          plugins={[
-            {
-              name: "Tanstack Router",
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-          ]}
-        />
-        <Scripts />
-      </body>
-    </html>
+    <QueryClientProvider client={queryClient}>
+      <NextThemesProvider attribute="class" defaultTheme="system">
+        <html lang="en">
+          <head>
+            <script
+              crossOrigin="anonymous"
+              src="//unpkg.com/react-scan/dist/auto.global.js"
+            ></script>
+            <HeadContent />
+          </head>
+          <body className="pt-[3.777rem]">
+            <Toaster />
+            <Navbar />
+            {children}
+            <TanStackDevtools
+              config={{
+                position: "bottom-right",
+              }}
+              plugins={[
+                {
+                  name: "Tanstack Router",
+                  render: <TanStackRouterDevtoolsPanel />,
+                },
+              ]}
+            />
+            <Scripts />
+          </body>
+        </html>
+      </NextThemesProvider>
+    </QueryClientProvider>
   );
 }

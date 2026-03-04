@@ -1,6 +1,6 @@
 import { UserCircle } from "lucide-react";
 import { Button } from "../ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { createAuthClient } from "better-auth/react";
 
 const authClient = createAuthClient({

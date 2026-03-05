@@ -59,7 +59,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             ></script>
             <HeadContent />
           </head>
-          <body className="pt-[3.777rem]">
+          <body className="pt-[3.777rem] px-4">
             <Toaster />
             <Navbar />
             {children}

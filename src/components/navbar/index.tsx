@@ -44,7 +44,7 @@ export function Navbar() {
       <div className="flex items-center justify-between w-full max-w-7xl mx-auto relative">
         {/* 1. Logo - Left */}
         <div className="z-60">
-          <a className="text-xl cursor-pointer font-medium tracking-wide dark:text-white text-black">
+          <a className="text-xl cursor-pointer font-medium tracking-wide text-foreground">
             Al-Hedayah
           </a>
         </div>
@@ -58,7 +58,7 @@ export function Navbar() {
           )}
         >
           {/* Nav Links */}
-          <div className="flex items-center space-x-8 max-md:flex-col max-md:space-x-0 max-md:items-baseline max-md:gap-6">
+          <div className="flex items-center space-x-8 max-md:flex-col max-md:space-x-0 max-md:items-baseline max-md:gap-6 md:translate-x-12">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -89,6 +89,7 @@ export function Navbar() {
             {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </Button>
 
+          {/* Profile Icon */}
           <ProfileIcon />
         </div>
       </div>

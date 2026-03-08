@@ -1,12 +1,15 @@
-import { getQuran } from "@/lib/quran-client/quran.ts";
+import { getQuran } from "@/lib/quran-client/quran";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/sampel")({
   component: RouteComponent,
   loader: async () => {
-    const verse = await getQuran.verses.findByKey("2:255", {
+    const verse = await getQuran.verses.findByKey("2:55", {
       translations: [20],
-      words: true,
+      fields: {
+        textUthmani: true,
+        codeV1: true,
+      },
     });
     return verse;
   },

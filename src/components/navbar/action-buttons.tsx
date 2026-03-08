@@ -13,7 +13,9 @@ export const ActionButtons = ({ className = "", mounted }: ActionBtnProps) => {
     <>
       <div className={cn("flex items-center gap-1", className)}>
         <Button variant="ghost" size="icon" className="rounded-full">
-          <Search className="w-5 h-5" />
+          <a href="#search">
+            <Search className="w-5 h-5" />
+          </a>
         </Button>
         <Button variant="ghost" size="icon" className="rounded-full">
           <Languages className="w-5 h-5" />

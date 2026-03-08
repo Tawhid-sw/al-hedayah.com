@@ -19,6 +19,7 @@
     "@imagekit/nodejs": "^7.3.0",
     "@imagekit/react": "^5.0.2",
     "@neondatabase/serverless": "^1.0.2",
+    "@quranjs/api": "^2.1.0",
     "@tailwindcss/vite": "^4.2.0",
     "@tanstack/react-devtools": "^0.9.6",
     "@tanstack/react-form": "^1.28.3",

@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SampelRouteImport } from './routes/sampel'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as OwnerCreateOrganizationRouteImport } from './routes/owner/create-organization'
@@ -23,6 +24,11 @@ import { Route as LibraryIdPostIdRouteImport } from './routes/library/id.$postId
 import { Route as DashboardPostEditPostIdRouteImport } from './routes/dashboard/post-edit/$postId'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth.$'
 
+const SampelRoute = SampelRouteImport.update({
+  id: '/sampel',
+  path: '/sampel',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -92,6 +98,7 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/sampel': typeof SampelRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/set-new-password': typeof AuthSetNewPasswordRoute
   '/auth/sign-in': typeof AuthSignInRoute
@@ -107,6 +114,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/sampel': typeof SampelRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/set-new-password': typeof AuthSetNewPasswordRoute
   '/auth/sign-in': typeof AuthSignInRoute
@@ -123,6 +131,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/sampel': typeof SampelRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/set-new-password': typeof AuthSetNewPasswordRoute
   '/auth/sign-in': typeof AuthSignInRoute
@@ -140,6 +149,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/sampel'
     | '/auth/forgot-password'
     | '/auth/set-new-password'
     | '/auth/sign-in'
@@ -155,6 +165,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/sampel'
     | '/auth/forgot-password'
     | '/auth/set-new-password'
     | '/auth/sign-in'
@@ -170,6 +181,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/sampel'
     | '/auth/forgot-password'
     | '/auth/set-new-password'
     | '/auth/sign-in'
@@ -186,6 +198,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SampelRoute: typeof SampelRoute
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthSetNewPasswordRoute: typeof AuthSetNewPasswordRoute
   AuthSignInRoute: typeof AuthSignInRoute
@@ -202,6 +215,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sampel': {
+      id: '/sampel'
+      path: '/sampel'
+      fullPath: '/sampel'
+      preLoaderRoute: typeof SampelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -298,6 +318,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SampelRoute: SampelRoute,
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthSetNewPasswordRoute: AuthSetNewPasswordRoute,
   AuthSignInRoute: AuthSignInRoute,

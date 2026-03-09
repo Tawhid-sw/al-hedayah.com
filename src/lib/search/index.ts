@@ -1,16 +1,11 @@
 import { createServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
-import * as z from "zod";
 import { getQuran } from "../quran-client/quran"; // Adjust path
 import type { ChapterId, VerseKey } from "@quranjs/api";
 
-const searchProps = z.object({
-  searchParams: z.string(),
-});
-
 // --- SERVER FUNCTION ---
 export const getSearch = createServerFn({ method: "POST" })
-  .inputValidator(searchProps)
+  .inputValidator((data: { searchParams: string }) => data)
   .handler(async ({ data }) => {
     const { searchParams } = data;
     const trimmedInput = searchParams.trim();
@@ -52,7 +47,7 @@ export const getSearch = createServerFn({ method: "POST" })
         return {
           type: "chapter" as const,
           id: searchResult.id,
-          nameArabic: searchResult.nameArabic,
+          nameComplex: searchResult.nameComplex,
           translatedName: searchResult.translatedName.name,
           versesCount: searchResult.versesCount,
         };
@@ -73,7 +68,9 @@ export const useSearchQuery = (search: string) => {
       // Call the server function
       return await getSearch({ data: { searchParams: search } });
     },
-    enabled: search.trim().length > 0,
-    retry: false, // Don't retry on 404/not found errors
+    enabled: !!search, // Only runs if search is not empty
+    staleTime: Infinity, // Considers data fresh forever (stops auto-refetch)
+    refetchOnWindowFocus: false, // Stops fetch when you switch tabs and come back
+    refetchOnMount: false, // Stops fetch every time the component re-renders
   });
 };

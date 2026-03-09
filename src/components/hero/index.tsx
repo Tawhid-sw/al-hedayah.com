@@ -9,7 +9,7 @@ import { SearchBar } from "./search-bar";
 export const HeroSection = () => {
   return (
     <div>
-      <div className="z-10 flex items-center justify-center w-full flex-col gap-8 mt-4   rounded-lg p-8">
+      <div className="z-10 flex items-center justify-center w-full flex-col gap-12 mt-4   rounded-lg p-8">
         {/* Tagline */}
         <div
           className={cn(
@@ -45,8 +45,16 @@ export const HeroSection = () => {
           reward of the doers of good to be lost ( 40:60 ).
         </p>
 
+        {/* Search Bar */}
+        <div
+          className="flex items-center justify-center gap-2 w-full mx-auto "
+          id="search"
+        >
+          <SearchBar />
+        </div>
+
         {/* tags */}
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto -mt-4">
           <div className="flex flex-wrap items-center justify-center gap-6 max-sm:gap-4 text-zinc-500 text-sm max-sm:text-xs">
             <span className="hover:text-zinc-300 transition-colors cursor-default">
               40+ Languages
@@ -63,7 +71,7 @@ export const HeroSection = () => {
         </div>
 
         {/* button */}
-        <div className="flex items-center justify-center gap-8">
+        <div className="flex items-center justify-center gap-4 -mt-4">
           <Button className="flex items-center justify-between gap-2">
             <BookOpen /> Continue reading
           </Button>
@@ -76,15 +84,8 @@ export const HeroSection = () => {
         </div>
       </div>
 
-      {/* Search Bar */}
+      {/*  */}
       <div className="mt-8 flex items-center justify-between w-full">
-        <div
-          className="flex flex-1 items-center justify-items-start gap-2"
-          id="search"
-        >
-          <SearchBar />
-        </div>
-
         <div className="flex flex-1 items-center justify-end gap-4">
           <Tabs defaultValue="surah">
             <TabsList>

@@ -6,14 +6,16 @@ import { Search, Loader2, X } from "lucide-react";
 import { useSearchQuery } from "@/lib/search";
 import { SearchResult } from "./search-result";
 import { useMediaQueryDisplay } from "@/hooks/use-media-query-display";
+import { MobileViewSearchBar } from "./mobile-view-search-bar";
 
 export const SearchBar = () => {
   const [submittedSearch, setSubmittedSearch] = useState("");
   const [showResults, setShowResults] = useState(false);
   const [history, setHistory] = useState<string[]>([]);
+  const [isMobileView, setIsMobileView] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const breakpoint = useMediaQueryDisplay();
-  const isDesktop = ["md", "lg", "xl", "2xl"].includes(breakpoint);
+  const isDesktop = ["lg", "xl", "2xl"].includes(breakpoint);
 
   // Load history on mount
   useEffect(() => {
@@ -53,8 +55,14 @@ export const SearchBar = () => {
   const { data, isLoading, isFetching } = useSearchQuery(submittedSearch);
 
   // Logic: Show history when input is focused/clicked, but hide it if we have a real result showing
-  const onInputFocus = () => {
-    setShowResults(true);
+  const handleInputInteraction = () => {
+    if (isDesktop) {
+      // On Desktop: Open the dropdown (History or Results)
+      setShowResults(true);
+    } else {
+      // On Mobile: This is where you'll eventually open your Drawer/Modal
+      setIsMobileView(true);
+    }
   };
 
   useEffect(() => {
@@ -90,30 +98,35 @@ export const SearchBar = () => {
                 <Input
                   name={field.name}
                   value={field.state.value}
-                  onFocus={onInputFocus}
+                  onFocus={handleInputInteraction}
+                  onClick={handleInputInteraction}
                   onChange={(e) => {
                     field.handleChange(e.target.value);
-                    if (e.target.value === "") setSubmittedSearch("");
+                    if (e.target.value === "") {
+                      setSubmittedSearch("");
+                      if (isDesktop) setShowResults(false);
+                    }
                   }}
                   placeholder="Search Surahs (e.g. '1' or '2:255')..."
-                  className="py-5 pr-10 bg-zinc-950/50 border-zinc-800"
+                  className={`py-5 pr-10 bg-zinc-950/50 border-zinc-800 transition-all ${!isDesktop && "focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none cursor-pointer"}`}
                   readOnly={!isDesktop}
                 />
-                {field.state.value && (
-                  <X
-                    className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500 cursor-pointer"
-                    onClick={() => {
-                      form.setFieldValue("query", "");
-                      setSubmittedSearch("");
-                    }}
-                  />
-                )}
+                {field.state.value &&
+                  isDesktop && ( // Hide X on mobile main bar to keep it clean
+                    <X
+                      className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500 cursor-pointer"
+                      onClick={() => {
+                        form.setFieldValue("query", "");
+                        setSubmittedSearch("");
+                      }}
+                    />
+                  )}
               </div>
             )}
           />
         </div>
         <Button
-          className="hidden md:flex py-5"
+          className="max-md:hidden flex py-5"
           type="submit"
           disabled={isLoading || isFetching}
         >
@@ -125,13 +138,27 @@ export const SearchBar = () => {
         </Button>
       </form>
 
-      {showResults && (
+      {isDesktop && showResults && (
         <SearchResult
           data={data}
           history={history}
           isSearching={!!submittedSearch}
           onRemoveHistory={removeHistoryItem}
           onSelectHistory={selectHistoryItem}
+        />
+      )}
+
+      {/* Mobile View with Props Passed */}
+      {isMobileView && (
+        <MobileViewSearchBar
+          onClose={() => setIsMobileView(false)}
+          history={history}
+          onRemoveHistory={removeHistoryItem}
+          data={data}
+          isLoading={isLoading}
+          isFetching={isFetching}
+          onSearch={handleSearch}
+          submittedSearch={submittedSearch}
         />
       )}
     </div>

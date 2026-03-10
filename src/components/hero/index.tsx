@@ -9,7 +9,7 @@ import { SearchBar } from "./search-bar";
 export const HeroSection = () => {
   return (
     <div>
-      <div className="z-10 flex items-center justify-center w-full flex-col gap-12 mt-4   rounded-lg p-8">
+      <div className="z-10 flex items-center justify-center w-full flex-col md:gap-12 gap-8 mt-4 rounded-lg md:p-8 p-4">
         {/* Tagline */}
         <div
           className={cn(
@@ -32,7 +32,7 @@ export const HeroSection = () => {
       </p> */}
 
         {/* Text */}
-        <h1 className="text-xl smooth-fade sm:text-2xl md:text-3xl lg:text-4xl">
+        <h1 className="text-xl smooth-fade sm:text-2xl md:text-3xl lg:text-4xl text-center">
           <span className="bg-clip-text text-transparent bg-linear-to-b from-white via-zinc-200 to-zinc-400 leading-[1.4]">
             إِنَّهُ مَن يَتَّقِ وَيَصْبِرْ فَإِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ
             الْمُحْسِنِينَ
@@ -47,7 +47,7 @@ export const HeroSection = () => {
 
         {/* Search Bar */}
         <div
-          className="flex items-center justify-center gap-2 w-full mx-auto "
+          className="flex items-center justify-center gap-2 w-full "
           id="search"
         >
           <SearchBar />

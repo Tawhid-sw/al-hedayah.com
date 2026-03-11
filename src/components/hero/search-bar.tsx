@@ -31,7 +31,12 @@ export const SearchBar = () => {
   });
 
   const handleSearch = (query: string) => {
-    if (!query) return;
+    // FIX: Instead of returning, set it to empty so SearchResult knows to hide
+    if (!query) {
+      setSubmittedSearch("");
+      return;
+    }
+
     setSubmittedSearch(query);
     setShowResults(true);
 

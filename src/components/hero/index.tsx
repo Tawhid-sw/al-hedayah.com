@@ -32,7 +32,7 @@ export const HeroSection = () => {
       </p> */}
 
         {/* Text */}
-        <h1 className="text-xl smooth-fade sm:text-2xl md:text-3xl lg:text-4xl text-center">
+        <h1 className="text-2xl smooth-fade sm:text-2xl md:text-3xl lg:text-4xl text-center">
           <span className="bg-clip-text text-transparent bg-linear-to-b from-white via-zinc-200 to-zinc-400 leading-[1.4]">
             إِنَّهُ مَن يَتَّقِ وَيَصْبِرْ فَإِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ
             الْمُحْسِنِينَ

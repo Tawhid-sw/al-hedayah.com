@@ -2,8 +2,6 @@ import { cn } from "@/lib/utils";
 import { BookOpen, Bookmark } from "lucide-react";
 import { AnimatedShinyText } from "../ui/animated-shiny-text";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Shorter } from "../ui/sort-toggle";
 import { SearchBar } from "./search-bar";
 
 export const HeroSection = () => {
@@ -81,23 +79,6 @@ export const HeroSection = () => {
           >
             <Bookmark /> Bookmarks
           </Button>
-        </div>
-      </div>
-
-      {/*  */}
-      <div className="mt-8 flex items-center justify-between w-full">
-        <div className="flex flex-1 items-center justify-end gap-4">
-          <Tabs defaultValue="surah">
-            <TabsList>
-              <TabsTrigger value="surah">Surah</TabsTrigger>
-              <TabsTrigger value="juz">Juz</TabsTrigger>
-              <TabsTrigger value="Revelation_Order">
-                Revelation Order
-              </TabsTrigger>
-            </TabsList>
-          </Tabs>
-
-          <Shorter a="Ascending" b="Descending" className="text-sm" />
         </div>
       </div>
     </div>

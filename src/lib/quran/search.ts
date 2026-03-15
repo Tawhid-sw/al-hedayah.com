@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
-import { getQuran } from "../quran-client/quran"; // Adjust path
+import { getQuran } from "./quran"; // Adjust path
 import type { ChapterId, VerseKey } from "@quranjs/api";
 
 // --- SERVER FUNCTION ---

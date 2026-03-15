@@ -3,7 +3,7 @@ import { useForm } from "@tanstack/react-form";
 import { Input } from "../ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, Loader2, X } from "lucide-react";
-import { useSearchQuery } from "@/lib/search";
+import { useSearchQuery } from "@/lib/quran/search";
 import { SearchResult } from "./search-result";
 import { useMediaQueryDisplay } from "@/hooks/use-media-query-display";
 import { MobileViewSearchBar } from "./mobile-view-search-bar";

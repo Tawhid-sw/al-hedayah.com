@@ -84,7 +84,7 @@ export function AnimatedCircularProgressBar({
           className="opacity-100"
           style={
             {
-              stroke: gaugePrimaryColor,
+              stroke: value <= 0 ? gaugeSecondaryColor : gaugePrimaryColor,
               "--stroke-percent": currentPercent,
               strokeDasharray:
                 "calc(var(--stroke-percent) * var(--percent-to-px)) var(--circumference)",
